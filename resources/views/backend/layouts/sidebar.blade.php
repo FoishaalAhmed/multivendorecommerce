@@ -61,11 +61,59 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item">
-					<a href="{{ route('admin.categories.index') }}" class="nav-link @if (request()->is('admin/categories')) {{ 'active' }} @endif">
+
+				<li class="nav-item @if (request()->is('admin/categories') ||
+					request()->is('admin/sub-categories') || request()->is('admin/child-categories')) {{ 'menu-open' }} @endif">
+					<a href="#" class="nav-link @if (request()->is('admin/categories') ||
+					request()->is('admin/sub-categories') || request()->is('admin/child-categories')) {{ 'active' }} @endif">
 						<i class="nav-icon fas fa-list-alt"></i>
 						<p>
 							Categories
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('admin.categories.index') }}" class="nav-link @if (request()->is('admin/categories')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Main Categories</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.sub-categories.index') }}" class="nav-link @if (request()->is('admin/sub-categories')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Sub Categories</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.child-categories.index') }}" class="nav-link @if (request()->is('admin/child-categories')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Child Categories</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('admin.colors.index') }}" class="nav-link @if (request()->is('admin/colors')) {{ 'active' }} @endif">
+						<i class="fas fa-paint-brush nav-icon"></i>
+						<p>
+							Colors
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('admin.sizes.index') }}" class="nav-link @if (request()->is('admin/sizes')) {{ 'active' }} @endif">
+						<i class="nav-icon fas fa-asterisk"></i>
+						<p>
+							Sizes
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('admin.brands.index') }}" class="nav-link @if (request()->is('admin/brands')) {{ 'active' }} @endif">
+						<i class="nav-icon far fa-copyright"></i>
+						<p>
+							Brands
 						</p>
 					</a>
 				</li>

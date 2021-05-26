@@ -7,10 +7,13 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'as' => 'admin.', 'm
 
     Route::resources([
 
-        'users'      => 'UserController',
-        'faqs'       => 'FaqController',
-        'categories' => 'CategoryController',
-        'sub-categories' => 'SubCategoryController',
+        'users'            => 'UserController',
+        'faqs'             => 'FaqController',
+        'brands'           => 'BrandController',
+        'colors'           => 'ColorController',
+        'sizes'            => 'SizeController',
+        'categories'       => 'CategoryController',
+        'sub-categories'   => 'SubCategoryController',
         'child-categories' => 'ChildCategoryController',
     ]);
 
