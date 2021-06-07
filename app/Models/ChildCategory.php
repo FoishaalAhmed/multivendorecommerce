@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 use DB;
 
 class ChildCategory extends Model
@@ -43,8 +42,8 @@ class ChildCategory extends Model
         $storeChildCategory    = $this->save();
 
         $storeChildCategory ?
-            Session::flash('message', 'Child Category Created Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Child Category Created Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateChildCategory(Object $request, Int $id)
@@ -56,8 +55,8 @@ class ChildCategory extends Model
         $updateChildCategory       = $category->save();
 
         $updateChildCategory ?
-            Session::flash('message', 'Child Category Updated Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Child Category Updated Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroyChildCategory(Int $id)
@@ -66,7 +65,7 @@ class ChildCategory extends Model
         $deleteChildCategory = $category->delete();
 
         $deleteChildCategory ?
-            Session::flash('message', 'Child Category Deleted Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Child Category Deleted Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Color extends Model
 {
@@ -20,9 +19,9 @@ class Color extends Model
         $this->name = $request->name;
         $storeColor = $this->save();
 
-        $storeColor ? 
-        Session::flash('message', 'Color Save Successfully!') :
-        Session::flash('message', 'Something Went Wrong!') ;
+        $storeColor ?
+            session()->flash('message', 'Color Save Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateColor(Object $request, Int $id)
@@ -32,8 +31,8 @@ class Color extends Model
         $updateColor = $color->save();
 
         $updateColor ?
-            Session::flash('message', 'Color Update Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Color Update Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroyColor(Int $id)
@@ -42,7 +41,7 @@ class Color extends Model
         $deleteColor = $color->delete();
 
         $deleteColor ?
-            Session::flash('message', 'Color Delete Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Color Delete Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

@@ -11,15 +11,12 @@ use Illuminate\Http\Request;
 class ChildCategoryController extends Controller
 {
     private $childCategoryObject;
+
     public function __construct()
     {
         $this->childCategoryObject = new ChildCategory();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $childCategories = $this->childCategoryObject->getChildCategoriesWithCategoryAndSubCategory();
@@ -27,12 +24,6 @@ class ChildCategoryController extends Controller
         return view('backend.admin.childCategory', compact('childCategories', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate(ChildCategory::$validateRule);
@@ -40,12 +31,6 @@ class ChildCategoryController extends Controller
         return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\ChildCategory  $childCategory
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $childCategory   = ChildCategory::findOrFail($id);
@@ -55,26 +40,13 @@ class ChildCategoryController extends Controller
         return view('backend.admin.childCategory', compact('categories', 'childCategory', 'subCategories', 'childCategories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\ChildCategory  $childCategory
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate(ChildCategory::$validateRule);
         $this->childCategoryObject->updateChildCategory($request, $id);
         return redirect()->route('admin.child-categories.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\ChildCategory  $childCategory
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $this->childCategoryObject->destroyChildCategory($id);

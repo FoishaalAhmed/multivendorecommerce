@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Query extends Model
 {
@@ -26,8 +25,8 @@ class Query extends Model
         $query = Query::findOrFail($id);
         $destroy_query = $query->delete();
 
-        $destroy_query 
-        ? Session::flash('message', 'Query Deleted Successfully!') 
-        : Session::flash('message', 'Something Went Wrong!') ;
+        $destroy_query
+            ? session()->flash('message', 'Query Deleted Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 }

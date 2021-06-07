@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 use DB;
 
 class SubCategory extends Model
@@ -40,8 +39,8 @@ class SubCategory extends Model
         $storeSubCategory     = $this->save();
 
         $storeSubCategory ?
-            Session::flash('message', 'Sub Category Created Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Sub Category Created Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateSubCategory(Object $request, Int $id)
@@ -52,8 +51,8 @@ class SubCategory extends Model
         $updateSubCategory        = $category->save();
 
         $updateSubCategory ?
-            Session::flash('message', 'Sub Category Updated Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Sub Category Updated Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroySubCategory(Int $id)
@@ -62,7 +61,7 @@ class SubCategory extends Model
         $deleteSubCategory = $category->delete();
 
         $deleteSubCategory ?
-            Session::flash('message', 'Sub Category Deleted Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Sub Category Deleted Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

@@ -4,40 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
-use Session;
 
 class Profile extends Model
 {
-    /**
-     * Define table user.
-     */
 
     protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'address', 'photo',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
 
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -70,9 +51,9 @@ class Profile extends Model
         $user->photo     = $image_url;
         $userUpdate      = $user->save();
 
-        $userUpdate 
-        ? Session::flash('message', 'User Photo Updated Successfully!')
-        : Session::flash('message', 'Something Went Wrong!');
+        $userUpdate
+            ? session()->flash('message', 'User Photo Updated Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateUserPassword($request)
@@ -86,11 +67,10 @@ class Profile extends Model
 
             ])->save();
 
-            Session::flash('message', 'User Password Updated Successfully!');
-
+            session()->flash('message', 'User Password Updated Successfully!');
         } else {
 
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Something Went Wrong!');
         }
     }
 
@@ -105,7 +85,7 @@ class Profile extends Model
         $userUpdate      = $user->save();
 
         $userUpdate
-        ? Session::flash('message', 'User Info Updated Successfully!')
-        : Session::flash('message', 'Something Went Wrong!');
+            ? session()->flash('message', 'User Info Updated Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Size extends Model
 {
@@ -21,8 +20,8 @@ class Size extends Model
         $storeSize = $this->save();
 
         $storeSize ?
-            Session::flash('message', 'Size Save Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Size Save Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateSize(Object $request, Int $id)
@@ -32,8 +31,8 @@ class Size extends Model
         $updateSize = $size->save();
 
         $updateSize ?
-            Session::flash('message', 'Size Update Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Size Update Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroySize(Int $id)
@@ -42,7 +41,7 @@ class Size extends Model
         $deleteSize = $size->delete();
 
         $deleteSize ?
-            Session::flash('message', 'Size Delete Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Size Delete Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

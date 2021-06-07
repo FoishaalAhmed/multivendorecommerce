@@ -15,6 +15,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'as' => 'admin.', 'm
         'categories'       => 'CategoryController',
         'sub-categories'   => 'SubCategoryController',
         'child-categories' => 'ChildCategoryController',
+        'seller-categories' => 'SellerCategoryController',
     ]);
 
 });

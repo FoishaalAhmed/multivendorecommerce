@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Faq extends Model
 {
@@ -23,8 +22,8 @@ class Faq extends Model
         $storeFaq    = $this->save();
 
         $storeFaq ?
-            Session::flash('message', 'Faq Created Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Faq Created Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function updateFaq(Object $request, Int $id)
@@ -35,8 +34,8 @@ class Faq extends Model
         $updateFaq  = $faq->save();
 
         $updateFaq ?
-            Session::flash('message', 'Faq Updated Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Faq Updated Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroyFaq(Int $id)
@@ -45,7 +44,7 @@ class Faq extends Model
         $deleteFaq = $faq->delete();
 
         $deleteFaq ?
-            Session::flash('message', 'Faq Deleted Successfully!') :
-            Session::flash('message', 'Something Went Wrong!');
+            session()->flash('message', 'Faq Deleted Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

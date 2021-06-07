@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Contact extends Model
 {
@@ -36,8 +35,8 @@ class Contact extends Model
         $contact->address   = $request->address;
         $updateContact      = $contact->save();
 
-        $updateContact ? 
-        Session::flash('message', 'Contact Updated Successfully!') :
-        Session::flash('message', 'Something Went Wrong!') ;
+        $updateContact ?
+            session()->flash('message', 'Contact Updated Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }

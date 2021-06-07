@@ -14,11 +14,7 @@ class SubCategoryController extends Controller
     {
         $this->subCategoryObject = new SubCategory();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $subCategories = $this->subCategoryObject->getSubCategoriesWithCategory();
@@ -26,12 +22,6 @@ class SubCategoryController extends Controller
         return view('backend.admin.subCategory', compact('subCategories', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate(SubCategory::$validateRule);
@@ -39,12 +29,6 @@ class SubCategoryController extends Controller
         return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $subCategory   = SubCategory::findOrFail($id);
@@ -53,13 +37,6 @@ class SubCategoryController extends Controller
         return view('backend.admin.subCategory', compact('categories', 'subCategory', 'subCategories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate(SubCategory::$validateRule);
@@ -67,12 +44,6 @@ class SubCategoryController extends Controller
         return redirect()->route('admin.sub-categories.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $this->subCategoryObject->destroySubCategory($id);

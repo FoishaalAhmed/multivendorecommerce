@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
 
 class Brand extends Model
 {
@@ -26,9 +25,8 @@ class Brand extends Model
         $storeBrand      = $this->save();
 
         $storeBrand ?
-        Session::flash('message', 'Brand Created Successfully!') :
-        Session::flash('message', 'Something Went Wrong!');
-        
+            session()->flash('message', 'Brand Created Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
     public function updateBrand(Object $request, Int $id)
     {
@@ -51,9 +49,8 @@ class Brand extends Model
         $updateBrand     = $brand->save();
 
         $updateBrand ?
-        Session::flash('message', 'Brand Updated Successfully!') :
-        Session::flash('message', 'Something Went Wrong!');
-        
+            session()->flash('message', 'Brand Updated Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroyBrand(Int $id)
@@ -63,8 +60,7 @@ class Brand extends Model
         $destroyBrand = $brand->delete();
 
         $destroyBrand ?
-        Session::flash('message', 'Brand Deleted Successfully!') :
-        Session::flash('message', 'Something Went Wrong!');
-        
+            session()->flash('message', 'Brand Deleted Successfully!') :
+            session()->flash('message', 'Something Went Wrong!');
     }
 }
