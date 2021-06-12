@@ -7,36 +7,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Hash;
-use Session;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    use HasRoles;
+    use Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone', 'photo', 'address',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -69,8 +52,8 @@ class User extends Authenticatable
         $user_info->assignRole($request->role);
 
         $userStore
-            ? Session::flash('message', 'New User Created Successfully!')
-            : Session::flash('message', 'Something Went Wrong!');
+            ? session()->flash('message', 'New User Created Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 
 
@@ -102,8 +85,8 @@ class User extends Authenticatable
         $user->assignRole($request->role);
 
         $userUpdate
-            ? Session::flash('message', 'User Updated Successfully!')
-            : Session::flash('message', 'Something Went Wrong!');
+            ? session()->flash('message', 'User Updated Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 
     public function destroyUser($id)
@@ -114,7 +97,7 @@ class User extends Authenticatable
         $userDelete = $this::where('id', $id)->delete();
 
         $userDelete
-            ? Session::flash('message', 'User Deleted Successfully!')
-            : Session::flash('message', 'Something Went Wrong!');
+            ? session()->flash('message', 'User Deleted Successfully!')
+            : session()->flash('message', 'Something Went Wrong!');
     }
 }

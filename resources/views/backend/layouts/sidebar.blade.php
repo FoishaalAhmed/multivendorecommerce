@@ -125,6 +125,31 @@
 						</p>
 					</a>
 				</li>
+				<li class="nav-item @if (request()->is('admin/pages') ||
+					request()->is('admin/pages/create') || request()->is('admin/pages/*')) {{ 'menu-open' }} @endif">
+					<a href="#" class="nav-link @if (request()->is('admin/pages') ||
+						request()->is('admin/pages/create') || request()->is('admin/pages/*')) {{ 'active' }} @endif">
+						<i class="nav-icon fas fa-file"></i>
+						<p>
+							Pages
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('admin.pages.create') }}" class="nav-link @if (request()->is('admin/pages/create')) {{ 'active' }} @endif">
+								<i class="fas fa-plus-square nav-icon"></i>
+								<p>New Pages</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.pages.index') }}" class="nav-link @if (request()->is('admin/pages')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Pages</p>
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li class="nav-item">
 					<a href="{{ route('admin.contacts') }}" class="nav-link @if (request()->is('admin/contacts')) {{ 'active' }} @endif">
 						<i class="nav-icon far fa-address-card"></i>
@@ -134,7 +159,29 @@
 					</a>
 				</li>
 			@else
-				
+				<li class="nav-item @if (request()->is('seller/products') || request()->is('seller/products/*')) {{ 'menu-open' }} @endif">
+					<a href="#" class="nav-link @if (request()->is('seller/products') || request()->is('seller/products/*')) {{ 'active' }} @endif">
+						<i class="nav-icon fab fa-product-hunt"></i>
+						<p>
+							Products
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('seller.products.create') }}" class="nav-link @if (request()->is('seller/products/create')) {{ 'active' }} @endif">
+								<i class="fas fa-plus-square nav-icon"></i>
+								<p>New Products</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('seller.products.index') }}" class="nav-link @if (request()->is('seller/products')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Products</p>
+							</a>
+						</li>
+					</ul>
+				</li>
             @endhasrole
         </ul>
     </nav>

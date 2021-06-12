@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         } else {
 
-            //return redirect(route('blogger.dashboard'));
+            return redirect(route('seller.dashboard'));
         }
     }
 }

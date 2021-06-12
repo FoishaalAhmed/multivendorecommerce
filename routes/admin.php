@@ -8,6 +8,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'as' => 'admin.', 'm
     Route::resources([
 
         'users'            => 'UserController',
+        'pages'            => 'PageController',
         'faqs'             => 'FaqController',
         'brands'           => 'BrandController',
         'colors'           => 'ColorController',
