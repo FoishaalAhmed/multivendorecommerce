@@ -8,7 +8,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Color;
+use App\Models\ColorProduct;
 use App\Models\Product;
+use App\Models\ProductSize;
 use App\Models\Size;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -64,13 +66,29 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = Category::select('id', 'name')->get();
-        $subCategories = SubCategory::select('id', 'name')->get();
-        $childCategories = ChildCategory::select('id', 'name')->get();
+        $subCategories = SubCategory::where('category_id', $product->category_id)->select('id', 'name')->get();
+        $childCategories = ChildCategory::where('sub_category_id', $product->subcategory_id)->select('id', 'name')->get();
+        $productColors = ColorProduct::where('product_id', $product->id)->select('color_id')->get()->pluck('color_id');
+        $productSizes = ProductSize::where('product_id', $product->id)->select('size_id')->get()->pluck('size_id');
+
+        $productSize = [];
+        $productColor = [];
+
+        foreach ($productSizes as $key => $value) {
+
+            array_push($productSize, $value);
+        }
+
+        foreach ($productColors as $key => $value) {
+
+            array_push($productColor, $value);
+        }
+
         $brands = Brand::select('id', 'name')->get();
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
 
-        return view('backend.seller.products.edit', compact('categories', 'subCategories', 'childCategories', 'brands', 'colors', 'sizes', 'product'));
+        return view('backend.seller.products.edit', compact('categories', 'subCategories', 'childCategories', 'brands', 'colors', 'sizes', 'product', 'productColor', 'productSize'));
     }
 
 

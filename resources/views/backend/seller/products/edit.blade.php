@@ -52,7 +52,7 @@
                                 <div class="col-md-6">
 									<div class="form-group">
 										<label>{{__('Category')}}</label>
-										<select class="form-control select2" style="width: 100%;" name="category_id" required="">
+										<select class="form-control select2" style="width: 100%;" name="category_id" required="" id="category" onchange="getSubCategoryByCategory();">
 											
 											@foreach ($categories as $item)
 												<option value="{{$item->id}}" 
@@ -68,7 +68,7 @@
                                 <div class="col-md-6">
 									<div class="form-group">
 										<label>{{__('Sub Category')}}</label>
-										<select class="form-control select2" style="width: 100%;" name="subcategory_id" required="">
+										<select class="form-control select2" style="width: 100%;" name="subcategory_id" required="" id="sub_category" onchange="getChildCategoryBySubCategory();">
 											
 											@foreach ($subCategories as $item)
 												<option value="{{$item->id}}"
@@ -84,7 +84,7 @@
                                 <div class="col-md-6">
 									<div class="form-group">
 										<label>{{__('Child Category')}}</label>
-										<select class="form-control select2" style="width: 100%;" name="child_category_id" required="">
+										<select class="form-control select2" style="width: 100%;" name="child_category_id" required="" id="child_category">
 											
 											@foreach ($childCategories as $item)
 												<option value="{{$item->id}}"
@@ -119,7 +119,7 @@
 										<select class="form-control select2" style="width: 100%;" name="color_id[]" multiple>
 											
 											@foreach ($colors as $item)
-												<option value="{{$item->id}}">{{$item->name}}</option>
+												<option value="{{$item->id}}" @if (in_array($item->id, $productColor)) {{ 'selected' }} @endif>{{$item->name}}</option>
 											@endforeach
 										</select>
 									</div>
@@ -132,7 +132,7 @@
 										<select class="form-control select2" style="width: 100%;" name="size_id[]" multiple>
 											
 											@foreach ($sizes as $item)
-												<option value="{{$item->id}}">{{$item->name}}</option>
+												<option value="{{$item->id}}" @if (in_array($item->id, $productSize)) {{ 'selected' }} @endif>{{$item->name}}</option>
 											@endforeach
 										</select>
 									</div>
@@ -276,6 +276,92 @@
 		$("#slug").val(slug);
 
 	});
+
+	function getSubCategoryByCategory() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
+            });
+
+            let category_id = $('#category').val();
+            let category = $('#category option:selected').text();
+
+            $.ajax({
+
+                url: "{{ route('fetch.sub.category') }}",
+                method: 'POST',
+                data: {
+                    'category_id': category_id,
+                },
+                success: function(data2) {
+
+                    let data = JSON.parse(data2);
+
+                    $('#sub_category').find('option').remove().end().append("<option value=''>Select " +
+                        category + "\'s Subcategory</option>");
+
+                    $.each(data, function(i, item) {
+
+                        $("#sub_category").append($('<option>', {
+                            value: this.id,
+                            text: this.name,
+                        }));
+
+                    });
+
+                },
+
+                error: function(error) {
+
+                    console.log(error);
+                }
+            });
+        }
+
+        function getChildCategoryBySubCategory() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
+            });
+
+            let sub_category_id = $('#sub_category').val();
+            let sub_category = $('#sub_category option:selected').text();
+
+            $.ajax({
+
+                url: "{{ route('fetch.child.category') }}",
+                method: 'POST',
+                data: {
+                    'sub_category_id': sub_category_id,
+                },
+                success: function(data2) {
+
+                    let data = JSON.parse(data2);
+
+                    $('#child_category').find('option').remove().end().append("<option value=''>Select " +
+                        sub_category + "\'s Child Category</option>");
+
+                    $.each(data, function(i, item) {
+
+                        $("#child_category").append($('<option>', {
+                            value: this.id,
+                            text: this.name,
+                        }));
+
+                    });
+
+                },
+
+                error: function(error) {
+
+                    console.log(error);
+                }
+            });
+        }
 
 </script>
 @endsection

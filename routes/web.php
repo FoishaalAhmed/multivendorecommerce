@@ -1,8 +1,6 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Frontend\HomeController@index');
 
 Auth::routes();
 
@@ -20,5 +18,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     /**  helper route start **/
     Route::post('fetch-sub-category', 'HelperController@subCategory')->name('fetch.sub.category');
+    Route::post('fetch-child-category', 'HelperController@childCategory')->name('fetch.child.category');
     /**  helper route end **/
 });

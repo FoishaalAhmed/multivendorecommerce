@@ -93,6 +93,33 @@
 						</li>
 					</ul>
 				</li>
+
+				<li class="nav-item @if (request()->is('admin/seller-categories') ||
+					request()->is('admin/seller-categories/create') || request()->is('admin/seller-categories/*')) {{ 'menu-open' }} @endif">
+					<a href="#" class="nav-link @if (request()->is('admin/seller-categories') ||
+						request()->is('admin/seller-categories/create') || request()->is('admin/seller-categories/*')) {{ 'active' }} @endif">
+						<i class="nav-icon fas fa-user-secret"></i>
+						<p>
+							Seller Categories
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="{{ route('admin.seller-categories.create') }}" class="nav-link @if (request()->is('admin/seller-categories/create')) {{ 'active' }} @endif">
+								<i class="fas fa-plus-square nav-icon"></i>
+								<p>New Seller Category</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('admin.seller-categories.index') }}" class="nav-link @if (request()->is('admin/seller-categories')) {{ 'active' }} @endif">
+								<i class="fas fa-list-alt nav-icon"></i>
+								<p>Seller Categories</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				
 				<li class="nav-item">
 					<a href="{{ route('admin.colors.index') }}" class="nav-link @if (request()->is('admin/colors')) {{ 'active' }} @endif">
 						<i class="fas fa-paint-brush nav-icon"></i>

@@ -37,7 +37,7 @@ class ProductRequest extends FormRequest
             return $rules + [
 
                 'display' => 'mimes:jpeg,jpg,png,gif,webp|max:1000|required',
-                'slug'    => 'required|string|max:15|unique:products,slug',
+                'slug'    => 'required|string|max:255|unique:products,slug',
 
             ];
         } else {
@@ -45,7 +45,7 @@ class ProductRequest extends FormRequest
             return $rules + [
 
                 'display' => 'mimes:jpeg,jpg,png,gif,webp|max:1000|nullable',
-                'slug'    => 'required|string|max:15|unique:products,slug,' . $this->product,
+                'slug'    => 'required|string|max:255|unique:products,slug,' . $this->product,
 
             ];
         }

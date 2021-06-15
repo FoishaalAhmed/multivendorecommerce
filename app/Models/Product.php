@@ -42,6 +42,7 @@ class Product extends Model
         $product_id              = $this->id;
 
         if ($request->sizes != null) {
+            
             foreach ($request->sizes as $key => $value) {
 
                 $productSize = new ProductSize();
