@@ -15,11 +15,6 @@ class Category extends Model
         'name'      => 'required|string|max: 255',
     ];
 
-    public function products()
-    {
-        return $this->belongsToMany('App\Model\Product');
-    }
-
     public function storeCategory(Object $request)
     {
         $this->name      = $request->name;

@@ -28,7 +28,9 @@ class ChildCategory extends Model
         $subCategories = DB::table('child_categories')
             ->join('categories', 'child_categories.category_id', '=', 'categories.id')
             ->join('sub_categories', 'child_categories.sub_category_id', '=', 'sub_categories.id')
-            ->select('sub_categories.*', 'categories.name as category', 'sub_categories.name as sub_category')
+            ->select('child_categories.*', 'categories.name as category', 'sub_categories.name as sub_category')
+            ->orderBy('categories.name', 'asc')
+            ->orderBy('sub_categories.name', 'asc')
             ->orderBy('child_categories.name', 'asc')
             ->get();
         return $subCategories;

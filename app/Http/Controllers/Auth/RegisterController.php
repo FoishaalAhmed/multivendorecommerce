@@ -53,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            //'phone' => ['required', 'string', 'max:15', 'unique:users'],
+            'phone' => ['required', 'string', 'max:15', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -66,17 +66,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = Role::create(['name' => 'Admin']);
-
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            //'phone' => $data['phone'],
-            //'address' => $data['address'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $role_r = Role::where('name', 'Admin')->first();
+        $role_r = Role::where('name', 'Seller')->first();
 
         $user->assignRole($role_r);
 

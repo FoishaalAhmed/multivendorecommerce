@@ -20,6 +20,7 @@ class ChildCategoryController extends Controller
     public function index()
     {
         $childCategories = $this->childCategoryObject->getChildCategoriesWithCategoryAndSubCategory();
+
         $categories = Category::orderBy('name', 'asc')->get();
         return view('backend.admin.childCategory', compact('childCategories', 'categories'));
     }

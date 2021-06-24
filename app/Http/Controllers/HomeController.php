@@ -28,6 +28,14 @@ class HomeController extends Controller
 
             return redirect(route('admin.dashboard'));
 
+        }elseif (@Auth::user()->hasRole(['Merchant'])) {
+
+            return redirect(route('merchant.dashboard'));
+
+        } elseif (@Auth::user()->hasRole(['Estore'])) {
+
+            return redirect(route('estore.dashboard'));
+
         } else {
 
             return redirect(route('seller.dashboard'));

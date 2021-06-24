@@ -43,12 +43,11 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
         $this->mapAdminRoutes();
-
         $this->mapSellerRoutes();
+        $this->mapMerchantRoutes();
+        $this->mapEstoreRoutes();
 
     }
 
@@ -92,6 +91,34 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/seller.php'));
+    }
+
+    /**
+     * Define the "merchant" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapMerchantRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/merchant.php'));
+    }
+
+    /**
+     * Define the "estore" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapEstoreRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/estore.php'));
     }
 
     /**

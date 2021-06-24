@@ -17,17 +17,13 @@ class SubCategory extends Model
         'category_id' => 'required|numeric',
     ];
 
-    public function products()
-    {
-        return $this->belongsToMany('App\Model\Product');
-    }
-
     public function getSubCategoriesWithCategory()
     {
         $subCategories = DB::table('sub_categories')
                              ->join('categories', 'sub_categories.category_id', '=', 'categories.id')
                              ->select('sub_categories.*', 'categories.name as category')
                              ->orderBy('sub_categories.name', 'asc')
+                             ->orderBy('categories.name', 'asc')
                              ->get();
         return $subCategories;
     }

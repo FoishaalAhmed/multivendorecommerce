@@ -34,15 +34,6 @@
   <link rel="stylesheet" href="{{asset('public/backend/plugins/summernote/summernote-bs4.min.css')}}">
 
 </head>
-<!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 <body class="hold-transition sidebar-mini dark-mode" <?php if (session()->has('message')) echo "onload='setTimeout(snackbar_function, 100)';" ?> >
   <div id="snackbar">{{session('message')}}</div>
 <div class="wrapper">

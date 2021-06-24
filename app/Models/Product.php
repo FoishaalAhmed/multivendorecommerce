@@ -172,7 +172,7 @@ class Product extends Model
 
         ProductSize::where('product_id', $id)->delete();
         ColorProduct::where('product_id', $id)->delete();
-        $destroyProduct = $product->save() ;
+        $destroyProduct = $product->delete() ;
         $destroyProduct
             ? session()->flash('message', 'Product Deleted Successfully!')
             : session()->flash('message', 'Something Went Wrong!');
