@@ -133,7 +133,7 @@
                           <li><b> {{ $subCategory->name }} <span class="caret"></span></b></li>
                           @foreach (App\Models\ChildCategory::where('sub_category_id', $subCategory->id)->orderBy('name', 'asc')->get() as $childCategory)
 
-                          <li class="nav-item"><a href="category/128" tabindex="1">{{ $childCategory->name }} </a></li>
+                          <li class="nav-item"><a href="{{ route('category.products',[$childCategory->id, strtolower(str_replace(' ', '-', $childCategory->name))]) }}" tabindex="1">{{ $childCategory->name }} </a></li>
                           
                           @endforeach
                         </div>

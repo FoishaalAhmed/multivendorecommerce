@@ -3,55 +3,10 @@
     <!-- Page Content -->
     <div class="container content my-2">
 
-        <div class="row">
-
-            <div class="col-lg-8 l5-padd">
-
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        @foreach ($sliders as $key => $item)
-                        <div class="carousel-item @if($key == 0) {{ 'active' }} @endif">
-                            <a href="{{ $item->link }}">
-                                <img class="d-block" src="{{ asset($item->photo) }}" height="390px"
-                                    width="100%" alt="">
-                            </a>
-                        </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 l5-padd">
-                <a href="#">
-                    <img src="{{ asset('public/frontend/assets/images/ads/contact.png') }}" height="185px" width="100%" alt="">
-                </a>
-                <a href="products/LED-TV/417/Sony-Plus-LED-HD-TV-24-Inch/42.html">
-                    <img class="mt-3" src="{{ asset('public/frontend/assets/images/ads/ad.jpg') }}" height="185px" width="100%"
-                        alt="https://shoptech.com.bd/products/LED-TV/417/Sony-Plus-LED-HD-TV-24-Inch/42">
-                </a>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
 
         <div class="row">
             <div class="col-lg-12 l5-padd">
-                <div class="heading1 mt-2 py-2">&nbsp;&nbsp;New Collections</div>
+                <div class="heading1 mt-2 py-2">&nbsp;&nbsp;{{ $category->name }} Collections</div>
             </div>
 
             @foreach ($products as $product)    

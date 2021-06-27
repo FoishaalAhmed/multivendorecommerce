@@ -11,6 +11,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'as' => 'admin.', 'm
     Route::resources([
 
         'users'               => 'UserController',
+        'sliders'             => 'SliderController',
         'pages'               => 'PageController',
         'faqs'                => 'FaqController',
         'brands'              => 'BrandController',
