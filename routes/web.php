@@ -11,9 +11,12 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/estore-registration', 'RegisterController@estore')->name('estore-registration');
     Route::post('/merchant-register', 'RegisterController@merchantRegister')->name('merchant-register');
     Route::post('/estore-register', 'RegisterController@estoreRegister')->name('estore-register');
-
     route::get('/category/{id}/{slug}', 'ProductController@products')->name('category.products');
     route::get('/product/{slug}', 'ProductController@product')->name('detail.product');
+
+    route::get('/buy-now/{product_id}', 'CartController@buy')->name('buy.now');
+    route::get('/carts', 'CartController@cart')->name('cart');
+    route::post('/carts/destroy', 'CartController@delete')->name('cart.delete');
 });
 
 Auth::routes();

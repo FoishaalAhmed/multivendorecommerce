@@ -79,7 +79,7 @@
                     <div class="card-footer pd-footer">
                         <div class="row">
                             <div class="col-6 col-lg-6">
-                                <a href='#' class="btn-cart"><button class="">Buy</button></a>
+                                <a href='{{ route('buy.now', $product->id) }}' class="btn-cart"><button class="">Buy</button></a>
                             </div>
                             <div class="col-6 col-lg-6">
                                 <a href='#' class="btn-cart"><button>Cart</button></a>
