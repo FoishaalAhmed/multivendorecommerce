@@ -73,36 +73,31 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="logo text-center"><a href="{{ URL::to('/') }}"><img
-                                src="{{ asset('public/frontend/assets/images/logo1.png') }}" height="50px"
-                                width="100%"></a></div>
-
+                    <div class="logo text-center"><a href="{{ URL::to('/') }}">
+                        <img src="{{ asset('public/frontend/assets/images/logo1.png') }}" height="50px" width="100%"></a></div>
                 </div>
                 <div class="col-lg-5">
                     <form method="post" action="">
                         <div class="input-group search">
-                            <input type="text" name="query" class="form-control" placeholder="Enter any keyword..."
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" name="query" class="form-control" placeholder="Enter any keyword..." aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button type="submit" name="submit" class="input-group-text"><i
                                         class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="col-lg-4">
                     <div class="float-right">
                         <div class="line-sharp">
-                            <div class="shop-icon"><a href="#"><i class="fa fa-shopping-cart"></i></a></div>
-                            <div class="count"><span>0</span></div>
+                            <div class="shop-icon"><a href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i></a></div>
+                            <div class="count"><span id="cart-count">{{Cart::count()}}</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Navigation -->
 
@@ -132,15 +127,13 @@
                                         <ul class="dropdown mega-area">
                                             <div class="container">
                                                 <div class="row">
-                                                    @foreach (App\Models\SubCategory::where('category_id', $category->id)->orderBy('name', 'asc')->get()
-    as $subCategory)
+                                                    @foreach (App\Models\SubCategory::where('category_id', $category->id)->orderBy('name', 'asc')->get() as $subCategory)
 
                                                         <div class="column-5 col-lg-3 column">
 
                                                             <li><b> {{ $subCategory->name }} <span
                                                                         class="caret"></span></b></li>
-                                                            @foreach (App\Models\ChildCategory::where('sub_category_id', $subCategory->id)->orderBy('name', 'asc')->get()
-    as $childCategory)
+                                                            @foreach (App\Models\ChildCategory::where('sub_category_id', $subCategory->id)->orderBy('name', 'asc')->get() as $childCategory)
 
                                                                 <li class="nav-item"><a
                                                                         href="{{ route('category.products', [$childCategory->id, strtolower(str_replace(' ', '-', $childCategory->name))]) }}"
@@ -155,7 +148,6 @@
                                         </ul>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
 

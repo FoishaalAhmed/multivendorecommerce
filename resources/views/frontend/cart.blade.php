@@ -59,7 +59,7 @@
                         </tbody>
                     </table>
                 </div>
-
+                <a href="{{ route('checkout') }}" class="btn bg-core text-white my-2 float-right"> Checkout </a>
             </div>
         </div>
     </div>

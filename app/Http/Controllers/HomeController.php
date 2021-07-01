@@ -2,41 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        if (@Auth::user()->hasRole(['Admin'])) {
+        if (auth()->user()->hasRole('Admin')) {
 
             return redirect(route('admin.dashboard'));
 
-        }elseif (@Auth::user()->hasRole(['Merchant'])) {
+        } elseif (auth()->user()->hasRole('Merchant')) {
 
             return redirect(route('merchant.dashboard'));
 
-        } elseif (@Auth::user()->hasRole(['Estore'])) {
+        } elseif (auth()->user()->hasRole('Estore')) {
 
             return redirect(route('estore.dashboard'));
 
+        } elseif(auth()->user()->hasRole('Seller')) {
+
+            return redirect(route('seller.dashboard'));
+
         } else {
+
+            $checkout = Session::get('checkout');
+            if ($checkout) {
+                Session::forget('checkout');
+                Session::save();
+                return redirect()->route('checkout');
+            }
 
             return redirect(route('seller.dashboard'));
         }

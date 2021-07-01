@@ -21,4 +21,9 @@ class LoginController extends Controller
     {
         return view('frontend.estore');
     }
+
+    public function user()
+    {
+        return view('frontend.user');
+    }
 }

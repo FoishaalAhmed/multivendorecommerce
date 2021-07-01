@@ -26,6 +26,20 @@ class CartController extends Controller
         return view('frontend.cart');
     }
 
+    public function store(Request $request)
+    {
+        $product_id = $request->product_id;
+        $size       = $request->size;
+        $color      = $request->color;
+        $qty        = $request->qty;
+
+        $product    = Product::findOrFail($product_id);
+
+        Cart::add(['id' => $product_id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->price, 'weight' => 1, 'options' => ['size' => $size, 'color' => $color, 'image' => $product->display]]);
+
+        echo Cart::count();
+    }
+
     public function delete(Request $request)
     {
         $rowId = $request->row_id;

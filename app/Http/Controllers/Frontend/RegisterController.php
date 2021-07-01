@@ -25,6 +25,11 @@ class RegisterController extends Controller
         return view('frontend.estoreRegister');
     }
 
+    public function user()
+    {
+        return view('frontend.userRegister');
+    }
+
     public function merchantRegister(Request $request)
     {
         $request->validate([
@@ -45,7 +50,7 @@ class RegisterController extends Controller
 
         $user->assignRole($role_r);
 
-        return redirect()->route('home');
+        return redirect()->route('merchant-login');
     }
 
     public function estoreRegister(Request $request)
@@ -68,6 +73,29 @@ class RegisterController extends Controller
 
         $user->assignRole($role_r);
 
-        return redirect()->route('home');
+        return redirect()->route('estore-login');
+    }
+
+    public function userRegister(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user =  User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $role_r = Role::where('name', 'User')->first();
+
+        $user->assignRole($role_r);
+
+        return redirect()->route('user-login');
     }
 }

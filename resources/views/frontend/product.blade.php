@@ -7,16 +7,14 @@
                 <img src="{{ asset($product->display) }}" alt="product1" width="100%" height="300px;" class="block__pic">
                 <div class="row">
                     <div class="col">
-                        <img src="{{ asset($product->display) }}"
-                            onerror="this.src= '{{ asset($product->display) }}';" alt="product1" width="100%"
-                            height="50px;" class="thumb">
+                        <img src="{{ asset($product->display) }}" onerror="this.src= '{{ asset($product->display) }}';"
+                            alt="product1" width="100%" height="50px;" class="thumb">
                     </div>
-                    @foreach ($productPhotos as $item) 
-                    <div class="col">
-                        <img src="{{ asset($item->photo) }}"
-                            onerror="this.src= '{{ asset($item->photo) }}';" alt="product1" width="100%"
-                            height="50px;" class="thumb">
-                    </div>
+                    @foreach ($productPhotos as $item)
+                        <div class="col">
+                            <img src="{{ asset($item->photo) }}" onerror="this.src= '{{ asset($item->photo) }}';"
+                                alt="product1" width="100%" height="50px;" class="thumb">
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -39,14 +37,14 @@
                         <div class="col-lg-6">
                             <div class="product-details-buy text-center">
 
-                                <a href="#" class="">Buy Now</a>
+                                <a href="{{ route('buy.now', $product->id) }}" class="">Buy Now</a>
 
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="product-details-add-to-cart text-center">
 
-                                <a href="#" class="">Add to Cart</a>
+                                <a href="#" class="" onclick="addToCart({{ $product->id }})">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -183,43 +181,92 @@
                 Related Products
             </div>
             @foreach ($relatedProducts as $related)
-            <div class="col-6 col-lg-2 mt-2 l5-padd">
-                <div class="card h-100 product">
-                    <a href="{{ route('detail.product', $related->slug) }}"><img class="card-img-top" src="{{ asset($related->display) }}"
-                            height="188px" width="100%" alt=""></a>
-                    <div class="card-body bg-core-light">
-                        <a href="{{ route('detail.product', $related->slug) }}">
-                            <div class="pd-header">{{ $related->name }}</div>
-                            <div class="pd-price mt-2">
-                                <span>Special Price BDT 10000</span><br>
-                                {{-- Product Code: SPM-94513  --}}
-                                <div class="product-details-star">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-o"></span>
-                                    <span class="fa fa-star-o"></span>
+                <div class="col-6 col-lg-2 mt-2 l5-padd">
+                    <div class="card h-100 product">
+                        <a href="{{ route('detail.product', $related->slug) }}"><img class="card-img-top"
+                                src="{{ asset($related->display) }}" height="188px" width="100%" alt=""></a>
+                        <div class="card-body bg-core-light">
+                            <a href="{{ route('detail.product', $related->slug) }}">
+                                <div class="pd-header">{{ $related->name }}</div>
+                                <div class="pd-price mt-2">
+                                    <span>Special Price BDT 10000</span><br>
+                                    {{-- Product Code: SPM-94513 --}}
+                                    <div class="product-details-star">
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star-o"></span>
+                                        <span class="fa fa-star-o"></span>
+                                    </div>
                                 </div>
-                            </div>
-                    </div>
-                    </a>
-                    <div class="card-footer pd-footer">
-                        <div class="row">
-                            <div class="col-6 col-lg-6">
-                                <a href='#' class="btn-cart"><button class="">Cart</button></a>
-                            </div>
-                            <div class="col-6 col-lg-6">
-                                <a href='#' class="btn-cart"><button>Buy</button></a>
+                        </div>
+                        </a>
+                        <div class="card-footer pd-footer">
+                            <div class="row">
+                                <div class="col-6 col-lg-6">
+                                    <a href='#' class="btn-cart" onclick="addToCart({{ $related->id }})"><button class="">Cart</button></a>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <a href='{{ route('buy.now', $related->id) }}' class="btn-cart"><button>Buy</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
-
-
-
-
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <script>
+        function addToCart(product_id) {
+            event.preventDefault();
+            $.ajaxSetup({
+
+                headers: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
+
+            });
+
+            var size = '';
+            var color = '';
+            var qty = 1;
+
+            $.ajax({
+
+                url: "{{ route('cart.store') }}",
+                method: 'POST',
+                data: {
+                    'product_id': product_id,
+                    'size': size,
+                    'color': color,
+                    'qty': qty,
+                },
+
+                success: function(data) {
+
+                    Swal.fire({
+                        title: 'Operation Successfull!',
+                        icon: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '<a href="{{ route('cart') }}" style="color:white; text-decoration: none">Go to cart</a>',
+                        cancelButtonText: 'Continue Shopping'
+                    })
+
+                    $('#cart-count').text(data);
+                },
+
+                error: function(error) {
+
+                    console.log(error);
+                }
+
+
+            });
+        }
+    </script>
 @endsection
