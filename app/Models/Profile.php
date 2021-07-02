@@ -31,7 +31,7 @@ class Profile extends Model
 
     public static $validatePhotoRule = [
 
-        'photo' => 'mimes:jpeg,jpg,png,gif,webp|required|max:100',
+        'photo' => 'mimes:jpeg,jpg,png,gif,webp|required|max:1000',
     ];
 
     public function updateUserPhoto($request)

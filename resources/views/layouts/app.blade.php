@@ -55,10 +55,19 @@
                         <div class="float-right top-bar-a">
 
                             <a href="#">Offer</a>
+                            @guest
                             <a href="{{ route('seller-login') }}">Seller</a>
                             <a href="{{ route('merchant-login') }}">Marchent</a>
                             <a href="{{ route('estore-login') }}">E store</a>
+                            <a href="{{ route('user-login') }}">User</a>
                             <a href="{{ route('services.index') }}">Servicing</a>
+                            @endguest
+                            
+                            @auth
+                            <a href="{{ route('user.orders') }}" >Orders</a>
+                            <a href="{{ route('services.index') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
+                            @endauth
 
                         </div>
 

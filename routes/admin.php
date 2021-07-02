@@ -7,10 +7,13 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'as' => 'admin.', 'm
     Route::get('/services', 'ServiceController@index')->name('services.index');
     Route::get('services/{id}', 'ServiceController@show')->name('services.show');
     Route::delete('services/destroy/{id}', 'ServiceController@show')->name('services.destroy');
+    Route::get('/orders/{id}/status/{status}', 'OrderController@status')->name('orders.status');
 
     Route::resources([
 
         'users'               => 'UserController',
+        'orders'              => 'OrderController',
+        'generals'            => 'GeneralController',
         'sliders'             => 'SliderController',
         'pages'               => 'PageController',
         'faqs'                => 'FaqController',

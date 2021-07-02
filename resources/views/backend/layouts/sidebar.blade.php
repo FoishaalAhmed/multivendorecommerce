@@ -25,6 +25,15 @@
             </li>
             @hasrole('Admin')
 
+				<li class="nav-item">
+					<a href="{{ route('admin.orders.index') }}" class="nav-link @if (request()->is('admin/orders') || request()->is('admin/orders/*')) {{ 'active' }} @endif">
+						<i class="fab fa-first-order nav-icon"></i>
+						<p>
+							Orders
+						</p>
+					</a>
+				</li>
+
 				<li class="nav-item @if (request()->is('admin/users') || request()->is('admin/users/*')) {{ 'menu-open' }} @endif">
 					<a href="#" class="nav-link @if (request()->is('admin/users') ||
 						request()->is('admin/users/create') || request()->is('admin/users/*')) {{ 'active' }} @endif">

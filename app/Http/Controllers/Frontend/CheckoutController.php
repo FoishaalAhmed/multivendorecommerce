@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\General;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -13,7 +15,8 @@ class CheckoutController extends Controller
     {
         if (Auth::check()) {
 
-            return view('frontend.checkout');
+            $shippingCharge  = General::where('name', 'delivery-charge')->first();
+            return view('frontend.checkout', compact('shippingCharge'));
 
         } else {
 
